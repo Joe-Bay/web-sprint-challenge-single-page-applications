@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Link, Route } from 'react-router-dom'
 import Form from './Form'
 import Home from './Home'
@@ -8,6 +8,7 @@ import axios from 'axios'
 
 
 const initialFormValues = {
+  name: '',
   size: '',
   sauce: '',
   specialInstruction: '',
@@ -20,6 +21,7 @@ const initialFormValues = {
 }
 
 const initialFormErrors = {
+  name: '',
   size: '',
   sauce: '',
 }
@@ -34,12 +36,12 @@ const App = () => {
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disableBtn, setDisableBtn] = useState(initialBtnDisable)
 
-  const upDateForm = (inputName, inputValue) => {
-    setFormValues({
-      ...formValues,
-      [inputName]: inputValue,
-    })
-  }
+  // const upDateForm = (inputName, inputValue) => {
+  //   setFormValues({
+  //     ...formValues,
+  //     [inputName]: inputValue,
+  //   })
+  // }
 
 
   const getPizzaData = () => {
@@ -107,16 +109,29 @@ const App = () => {
 
   const submitForm = () => {
     const newPizza = {
+      name: formValues.name.trim(),
       size: formValues.size.trim(),
       sauce: formValues.sauce.trim(),
       specialInstruction: formValues.specialInstruction.trim(),
       toppings: Object.keys(formValues.toppings).filter(top => formValues.toppings[top])
 
     }
+    postNewPizza(newPizza)
+    setPizza([newPizza, ...pizza])
+    setFormValues(initialFormValues)
   }
 
+  useEffect(() => {
+    getPizzaData()
+  }, [])
 
+  useEffect(() => {
+    formSchema.isValid(formValues).then(valid => {
+      setDisableBtn(!valid)
+    })
+  }, [formValues])
 
+console.log(pizza)
   return (
     <>
     <div className ='main-header'>
@@ -130,11 +145,24 @@ const App = () => {
       <Route path='/pizza'>
         <Form 
         values={formValues}
+        submit={submitForm}
+        inputChange={inputChange}
+        disable={disableBtn}
+        errors={formErrors}
+        checkboxChange={checkBoxChange}
         />
       </Route>
 
       <Route path ='/'>
-        <Home />
+        {pizza.map(piz => {
+          return ( 
+            
+          <Home key={piz.id} details={piz}/>
+          )
+       
+        })
+
+        }
       </Route>
     </Switch>
 
