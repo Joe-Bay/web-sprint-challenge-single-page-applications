@@ -151,16 +151,8 @@ const App = () => {
         />
       </Route>
 
-      <Route path ='/'>
-        {/* {pizza.map(piz => {
-          return (  */}
-            
-          <Home />
-          )
-       
-        {/* })
-
-        } */}
+      <Route path ='/'> 
+          <Home />   
       </Route>
     </Switch>
 

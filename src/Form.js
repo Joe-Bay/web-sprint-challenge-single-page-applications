@@ -30,7 +30,6 @@ export default function Form(props) {
             <h2> Build your Own Pizza</h2>
             {/* possible image here if i get time */}
             <div className='size-section'>
-                <h3>Build your Own Pizza</h3>
                 <div>{errors.name}</div>
                 <label>Name
                     <input 
