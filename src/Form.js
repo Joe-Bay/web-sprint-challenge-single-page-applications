@@ -43,7 +43,11 @@ export default function Form(props) {
                 </label>
                 <h4>Choice of size</h4>
                 <div>{errors.size}</div>
-                <select name='size' onChange={onInputChange}>
+                <select 
+                    name='size'
+                    onChange={onInputChange}
+                    value={values.size}
+                    >
                     <option value=''>Select a Size</option>
                     <option value='small'>Small</option>
                     <option value='medium'>Medium</option>
@@ -58,6 +62,7 @@ export default function Form(props) {
                         type='radio'
                         name='sauce'
                         value='original'
+                        checked={values.sauce === 'original'}
                         onChange={onInputChange}
                     
                     /><br /></label>
@@ -66,6 +71,7 @@ export default function Form(props) {
                         type='radio'
                         name='sauce'
                         value='garlicRanch'
+                        checked={values.sauce === 'garlicRanch'}
                         onChange={onInputChange}
                     
                     /><br /></label>
@@ -74,6 +80,7 @@ export default function Form(props) {
                         type='radio'
                         name='sauce'
                         value='BBQsauce'
+                        checked={values.sauce === 'BBQsauce'}
                         onChange={onInputChange}
                     
                     /><br /></label>
@@ -82,6 +89,7 @@ export default function Form(props) {
                         type='radio'
                         name='sauce'
                         value='spinachAlfredo'
+                        checked={values.sauce === 'spinachAlfredo'}
                         onChange={onInputChange}
                     /><br /></label>
                 </div>
@@ -129,7 +137,7 @@ export default function Form(props) {
                         />
                     </div>
                     <div className='submitButton'>
-                        <button onClick={onSubmit} disabled={disable}>Add to Order</button>
+                        <button id="submitBtn"onClick={onSubmit} disabled={disable}>Add to Order</button>
                     </div>
                 </div>
             </div>

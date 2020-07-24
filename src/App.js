@@ -41,7 +41,7 @@ const App = () => {
   
 
   const postNewPizza = newPizza => {
-    debugger
+    
     axios.post('https://reqres.in/api/users', newPizza)
     .then(res => {
       setPizza([res.data, ...pizza])
@@ -107,7 +107,7 @@ const App = () => {
 
 
   const submitForm = () => {
-    debugger
+    
     const newPizza = {
       name: formValues.name.trim(),
       size: formValues.size.trim(),
