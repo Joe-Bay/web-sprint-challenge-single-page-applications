@@ -36,32 +36,31 @@ const App = () => {
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disableBtn, setDisableBtn] = useState(initialBtnDisable)
 
-  // const upDateForm = (inputName, inputValue) => {
-  //   setFormValues({
-  //     ...formValues,
-  //     [inputName]: inputValue,
-  //   })
-  // }
 
+
+  
+
+  const postNewPizza = newPizza => {
+    debugger
+    axios.post('https://reqres.in/api/users', newPizza)
+    .then(res => {
+      setPizza([res.data, ...pizza])
+      console.log(res.data)
+      setFormValues(initialFormValues)
+      
+    })
+    .catch(err => {
+      console.log(`the err posting is ${err}`)
+    })
+  }
 
   const getPizzaData = () => {
-    axios.get('https://reqres.in/')
+    axios.get('https://reqres.in/api/users')
     .then( res => {
       console.log(res)
     })
     .catch(err => {
       console.log( `the err is ${err}`)
-    })
-  }
-
-  const postNewPizza = newPizza => {
-    axios.post('https://reqres.in/', newPizza)
-    .then(res => {
-      setPizza([res.data, ...pizza])
-      setFormValues(initialFormValues)
-    })
-    .catch(err => {
-      console.log(`the err posting is ${err}`)
     })
   }
 
@@ -108,6 +107,7 @@ const App = () => {
 
 
   const submitForm = () => {
+    debugger
     const newPizza = {
       name: formValues.name.trim(),
       size: formValues.size.trim(),
@@ -117,8 +117,7 @@ const App = () => {
 
     }
     postNewPizza(newPizza)
-    setPizza([newPizza, ...pizza])
-    setFormValues(initialFormValues)
+
   }
 
   useEffect(() => {
@@ -131,7 +130,6 @@ const App = () => {
     })
   }, [formValues])
 
-console.log(pizza)
   return (
     <>
     <div className ='main-header'>
@@ -154,15 +152,15 @@ console.log(pizza)
       </Route>
 
       <Route path ='/'>
-        {pizza.map(piz => {
-          return ( 
+        {/* {pizza.map(piz => {
+          return (  */}
             
-          <Home key={piz.id} details={piz}/>
+          <Home />
           )
        
-        })
+        {/* })
 
-        }
+        } */}
       </Route>
     </Switch>
 

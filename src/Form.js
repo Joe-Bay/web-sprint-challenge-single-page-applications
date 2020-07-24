@@ -26,7 +26,7 @@ export default function Form(props) {
 
 
     return (
-        <div className='form-container' onSubmit={onSubmit}>
+        <div className='form-container' >
             <h2> Build your Own Pizza</h2>
             {/* possible image here if i get time */}
             <div className='size-section'>
@@ -129,7 +129,7 @@ export default function Form(props) {
                         />
                     </div>
                     <div className='submitButton'>
-                        <button disabled={disable}>Add to Order</button>
+                        <button onClick={onSubmit} disabled={disable}>Add to Order</button>
                     </div>
                 </div>
             </div>
